@@ -1,0 +1,38 @@
+name: Developer Agent
+
+on:
+  issues:
+    types: [labeled]
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+
+jobs:
+  develop:
+    runs-on: ubuntu-latest
+    if: github.event.label.name == 'agent:develop'
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: 'agents/package-lock.json'
+      
+      - name: Install dependencies
+        working-directory: agents
+        run: npm ci
+      
+      - name: Run Developer Agent
+        working-directory: agents
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          DASHBOARD_URL: ${{ secrets.DASHBOARD_URL }}
+          DASHBOARD_API_KEY: ${{ secrets.DASHBOARD_API_KEY }}
+        run: node src/developer/index.js

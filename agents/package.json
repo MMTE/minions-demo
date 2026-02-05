@@ -1,0 +1,25 @@
+{
+  "name": "ai-dev-agents",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "GitHub-native multi-agent development system",
+  "scripts": {
+    "dev:developer": "node src/developer/index.js",
+    "dev:reviewer": "node src/reviewer/index.js",
+    "dev:architect": "node src/architect/index.js",
+    "dev:pm:triage": "node src/pm/triage.js",
+    "dev:pm:standup": "node src/pm/standup.js",
+    "test": "node --test",
+    "lint": "eslint src/"
+  },
+  "dependencies": {
+    "@octokit/rest": "^20.0.0",
+    "openai": "^4.20.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.55.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
