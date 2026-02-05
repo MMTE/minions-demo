@@ -1,0 +1,8 @@
+{
+  "name": "minions-demo",
+  "version": "1.0.0",
+  "description": "Demo project for Minions agents",
+  "scripts": {
+    "test": "echo \"No tests yet\" && exit 0"
+  }
+}
